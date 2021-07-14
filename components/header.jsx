@@ -22,6 +22,7 @@ const Header = () => {
           {user ? (
             <>
               <li>
+                {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
                 <a href="/api/auth/logout" data-testid="logout">
                   Logout
                 </a>
@@ -30,6 +31,7 @@ const Header = () => {
           ) : (
             <>
               <li>
+                {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
                 <a href="/api/auth/login" data-testid="login">
                   Login
                 </a>
