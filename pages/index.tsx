@@ -5,7 +5,7 @@ import { useUser } from '@auth0/nextjs-auth0';
 
 import Layout from '../components/layout';
 
-import styles from '../styles/Home.module.scss'
+import styles from '../styles/Home.module.css'
 
 export default function Home() {
   const { user, error, isLoading } = useUser();
@@ -31,6 +31,7 @@ export default function Home() {
           <h4>Rendered user info on the client</h4>
           <pre
             data-testid="profile"
+            className={styles.profileInfo}
           >
             {JSON.stringify(user, null, 2)}
           </pre>

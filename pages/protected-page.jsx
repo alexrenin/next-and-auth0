@@ -3,6 +3,8 @@ import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0';
 
 import Layout from '../components/layout';
 
+import styles from "../styles/ProtectedPage.module.css";
+
 export default function ProtectedPage() {
   const { user, error, isLoading } = useUser();
 
@@ -22,7 +24,7 @@ export default function ProtectedPage() {
       {user && (
         <>
           <h4>Profile</h4>
-          <pre>
+          <pre className={styles.profileInfo}>
             {JSON.stringify(user, null, 2)}
           </pre>
         </>
