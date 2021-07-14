@@ -1,21 +1,14 @@
-import React from "react";
-import Head from 'next/head'
-import Image from 'next/image'
+import React from 'react';
 import { useUser } from '@auth0/nextjs-auth0';
 
 import Layout from '../components/layout';
 
-import styles from '../styles/Home.module.scss'
-
 export default function Home() {
   const { user, error, isLoading } = useUser();
 
-  function onClick(): void {
-  }
-
   return (
     <Layout>
-      <h1>Next.js and Auth0 </h1>
+      <h1>Next.js and Auth0 Example</h1>
 
       {isLoading && <p>Loading login info...</p>}
 
@@ -29,11 +22,7 @@ export default function Home() {
       {user && (
         <>
           <h4>Rendered user info on the client</h4>
-          <pre
-            data-testid="profile"
-          >
-            {JSON.stringify(user, null, 2)}
-          </pre>
+          <pre data-testid="profile">{JSON.stringify(user, null, 2)}</pre>
         </>
       )}
 
@@ -47,7 +36,6 @@ export default function Home() {
           </p>
         </>
       )}
-
     </Layout>
   );
 }
