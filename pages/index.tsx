@@ -2,9 +2,10 @@ import React from "react";
 import useSWR from "swr";
 import { parseCookies } from "nookies";
 
-import Layout from '../components/layout';
+import Layout from '../components/Layout';
 
 import styles from '../styles/Home.module.css'
+
 
 const userEndpoint = `${process.env.NEXT_PUBLIC_IDENTITY_ENDPOINT}/userinfo`;
 const getUser = async () => {
@@ -38,17 +39,17 @@ export default function Home() {
     <Layout>
       <h1>Next.js and Auth0 </h1>
 
-      {isLoading && <p>Loading login info...</p>}
+      {isLoading && <p style={{ margin: "auto" }}>Loading login info...</p>}
 
       {error && (
-        <>
+        <div style={{ margin: "auto" }}>
           <h4>Error</h4>
           <pre>{error.message}</pre>
-        </>
+        </div>
       )}
 
       {user && (
-        <>
+        <div style={{ margin: "auto" }}>
           <h4>Rendered user info on the client</h4>
           <pre
             data-testid="profile"
@@ -56,20 +57,19 @@ export default function Home() {
           >
             {JSON.stringify(user, null, 2)}
           </pre>
-        </>
+        </div>
       )}
 
       {!isLoading && !error && !user && (
-        <>
+        <div style={{ margin: "auto" }}>
           <p>
             To test the login click in <i>Login</i>
           </p>
           <p>
-            Once you have logged in you should be able to click in <i>Protected Page</i> and <i>Logout</i>
+            Once you have logged in you should be able to see your user info and to click in <i>Logout</i>
           </p>
-        </>
+        </div>
       )}
-
     </Layout>
   );
 }

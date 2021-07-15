@@ -6,7 +6,7 @@ import { setCookie } from 'nookies';
 
 const getLoginUrl = (codeChallenge: string): string => {
   const url = new URL(`${process.env.NEXT_PUBLIC_IDENTITY_ENDPOINT}/authorize?`);
-  url.searchParams.append('client_id', process.env.AUTH0_CLIENT_ID as string);
+  url.searchParams.append('client_id', process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID as string);
   url.searchParams.append('response_type', 'code');
   url.searchParams.append('scope', 'openid profile email');
   url.searchParams.append('redirect_uri', `${process.env.NEXT_PUBLIC_BASE_URL}/auth/callback`);
@@ -42,8 +42,6 @@ function Authorize({ codeVerifier, redirectUrl }: { codeVerifier?: string; redir
 
       window.location.href = redirectUrl;
     } else {
-      // We shouldn't redirect to this route using Next.js router (we don't want to use "crypto" on client side)
-      // In this case we have to reload the page to receive SSR props
 
       window.location.reload();
     }

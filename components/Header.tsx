@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { parseCookies } from 'nookies';
 
-const Header = () => {
-  const isLogin = !!parseCookies().accessToken;
+const Header: React.FC = () => {
+  const [isLogin, setIsLogin] = useState<boolean>(false)
+
+  useEffect(
+    () => {
+      setIsLogin(!!parseCookies().accessToken);
+    },
+    [setIsLogin]
+  )
 
   return (
     <header>

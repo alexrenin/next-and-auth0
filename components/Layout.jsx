@@ -2,10 +2,9 @@ import React from 'react';
 import Head from 'next/head';
 import Image from "next/image";
 
-import Header from './header';
+import Header from './Header';
 
 import styles from "../styles/Layout.module.css";
-
 
 const Layout = ({ children }) => (
   <>
@@ -18,7 +17,7 @@ const Layout = ({ children }) => (
     <Header />
 
     <main className={styles.main}>
-      <div className="container">{children}</div>
+      {children}
     </main>
 
     <footer className={styles.footer}>
