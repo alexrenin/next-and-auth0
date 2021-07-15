@@ -1,17 +1,38 @@
 import React from "react";
-import Head from 'next/head'
-import Image from 'next/image'
-import { useUser } from '@auth0/nextjs-auth0';
+import useSWR from "swr";
+import { parseCookies } from "nookies";
 
 import Layout from '../components/layout';
 
 import styles from '../styles/Home.module.css'
 
-export default function Home() {
-  const { user, error, isLoading } = useUser();
-
-  function onClick(): void {
+const userEndpoint = `${process.env.NEXT_PUBLIC_IDENTITY_ENDPOINT}/userinfo`;
+const getUser = async () => {
+  const cookies = parseCookies();
+  const response = await fetch(userEndpoint, {
+    headers: {
+    'Authorization': `Bearer ${cookies.accessToken}`,
   }
+  });
+
+  const success = response.status === 200;
+
+  if (success) {
+    return {
+      user: await response.json(),
+    }
+  }
+
+  return {
+    response,
+  }
+};
+
+export default function Home() {
+  const { data, error } = useSWR(userEndpoint, getUser);
+  const { user } = data || {};
+
+  const isLoading = !data && !error;
 
   return (
     <Layout>

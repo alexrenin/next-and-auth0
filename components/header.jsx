@@ -1,9 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
-import { useUser } from '@auth0/nextjs-auth0';
+import { parseCookies } from 'nookies';
 
 const Header = () => {
-  const { user } = useUser();
+  const isLogin = !!parseCookies().accessToken;
 
   return (
     <header>
@@ -14,16 +14,11 @@ const Header = () => {
               <a>Home</a>
             </Link>
           </li>
-          <li>
-            <Link href="/protected-page">
-              <a>Protected Page</a>
-            </Link>
-          </li>
-          {user ? (
+          {isLogin ? (
             <>
               <li>
                 {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-                <a href="/api/auth/logout" data-testid="logout">
+                <a href="/auth/logout" data-testid="logout">
                   Logout
                 </a>
               </li>
@@ -32,7 +27,7 @@ const Header = () => {
             <>
               <li>
                 {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-                <a href="/api/auth/login" data-testid="login">
+                <a href="/auth/authorize" data-testid="login">
                   Login
                 </a>
               </li>
@@ -61,7 +56,7 @@ const Header = () => {
           margin-right: 1rem;
         }
         li:nth-child(2) {
-          margin-right: auto;
+          margin-left: auto;
         }
         a {
           color: #fff;
