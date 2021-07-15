@@ -11,7 +11,6 @@ const getLogoutUrl = () => {
 
 const getInitialProps = async (context: NextPageContext) => {
   if (context.res) {
-    console.log('destroyCookie')
     destroyCookie(context, 'accessToken', { path: '/' });
     destroyCookie(context, 'idToken', { path: '/' });
     destroyCookie(context, 'appSession', { path: '/' });
