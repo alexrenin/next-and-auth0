@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import useSWR from "swr";
 import { parseCookies } from "nookies";
 
@@ -32,30 +32,6 @@ const getUser = async () => {
 export default function Home() {
   const { data, error } = useSWR(userEndpoint, getUser);
   const { user } = data || {};
-  const [silentAuth, setSilentAuth] = useState<React.ReactNode>(null);
-
-  useEffect(
-    () => {
-      if (!!!parseCookies().accessToken) {
-        const iFrame = (
-          <iframe
-            style={{ width: 0, height: 0 }}
-            src='/auth/authorize'
-          />
-        );
-        setSilentAuth(iFrame);
-
-        setTimeout(
-          () => {
-            location.reload();
-          },
-          2000,
-        )
-      }
-    },
-    [],
-  )
-
   const isLoading = !data && !error;
 
   return (
@@ -93,7 +69,6 @@ export default function Home() {
           </p>
         </div>
       )}
-      {silentAuth}
     </Layout>
   );
 }
